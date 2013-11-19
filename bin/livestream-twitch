@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# This is just a quick (not fully working) livestream script.
+# TODO: Get the screen res (ask user)
+
+SIZE="1920x1080"
+FRAMERATE="30"
+
+ffmpeg \
+    -f x11grab -s "$SIZE" -r "$FRAMERATE" -i :0.0 \
+    -vb "$BITRATE" -pix_fmt yuv420p -vcodec libx264 \
+    -preset ultrafast -b:v 1024k -b:a 128k -threads 0 \
+    -f flv "rtmp://live.justin.tv/app/$DOTF_TWITCHKEY"
