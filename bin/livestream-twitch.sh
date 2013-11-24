@@ -3,7 +3,8 @@
 # This is just a quick (not fully working) livestream script.
 # TODO: Get the screen res (ask user)
 
-SIZE="1920x1080"
+DOTF_TWITCHKEY="live_20008920_tUkzT50Oxyauet1DHniqnvXVOa9pt6"
+SIZE="1366x768"
 FRAMERATE="30"
 
 ffmpeg \
