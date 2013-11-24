@@ -1,3 +1,3 @@
 #!/bin/bash
 
-alias youtube-mp3=${DOTF}/bin/youtube-mp3.sh
+alias youtube-mp3=${DOTFILEDIR}/bin/youtube-mp3.sh

@@ -1,7 +1,9 @@
 #!/bin/bash
 # Initialize the dotfiles
 
-for file in `pwd`/{config,aliases}.sh; do
+DOTFILEDIR=`pwd`
+
+for file in ${DOTFILEDIR}/{config,aliases}.sh; do
 	[ -r "$file" ] && source "$file"
 done
 unset file
