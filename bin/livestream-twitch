@@ -4,7 +4,7 @@
 # TODO: Get the screen res (ask user)
 
 DOTF_TWITCHKEY="live_20008920_tUkzT50Oxyauet1DHniqnvXVOa9pt6"
-SIZE="1366x768"
+SIZE="1920x1080"
 FRAMERATE="30"
 
 ffmpeg \
