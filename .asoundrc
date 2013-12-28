@@ -1,0 +1,9 @@
+ctl.!default {
+    type hw
+    card "Headset"
+}
+
+pcm.!default {
+    type hw
+    card "Headset"
+}
