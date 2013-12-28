@@ -1,9 +1,21 @@
-ctl.!default {
-    type hw
-    card "Headset"
-}
+#defaults.ctl.card 1
+#defaults.pcm.card 1
+
+#ctl.!default {
+#    type dmix
+#    card 0
+#}
+
+#pcm.!default {
+#    type dmix
+#    card 0
+#}
 
 pcm.!default {
-    type hw
-    card "Headset"
-}
+   type plug
+   slave.pcm {
+     @func getenv
+     vars [ ALSAPCM ]
+     default "dmix:Headset"
+   }
+ }
