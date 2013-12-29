@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DFDIR=~/.dotfiles
+
+
+cp -rvu ~/Scripts $DFDIR
+cp -rvu ~/.i3 $DFDIR
+cp -rvu ~/.asoundrc $DFDIR
+cp -rvu ~/.Xresources $DFDIR
+cp -rvu ~/.xinitrc $DFDIR
+cp -rvu ~/.bashrc $DFDIR

@@ -1,21 +1,9 @@
-#defaults.ctl.card 1
-#defaults.pcm.card 1
-
-#ctl.!default {
-#    type dmix
-#    card 0
-#}
-
-#pcm.!default {
-#    type dmix
-#    card 0
-#}
-
 pcm.!default {
-   type plug
-   slave.pcm {
-     @func getenv
-     vars [ ALSAPCM ]
-     default "dmix:Headset"
-   }
- }
+    type plug
+    slave.pcm {
+        @func getenv
+        vars [ ALSAPCM ]
+        #default "dmix:Intel"   # Placback to my Onboard soundcard
+        default "dmix:Headset"  # Playback to my USB headset
+    }
+}

@@ -8,5 +8,5 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
-PATH=$PATH:/home/kevin/Scripts/
-PATH=$PATH:/home/kevin/Development/SDK/ADT/sdk/tools/
+# Add my custom paths
+PATH=$PATH:~/Scripts/

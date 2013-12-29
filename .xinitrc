@@ -1,9 +1,6 @@
-[[ -f ~/.Xresources ]] && xrdb merge ~/.Xresources &
-[ ! -s ~/.config/mpd/pid ] && mpd ~/.config/mpd/mpd.conf &
+[ -f ~/.Xresources ] && xrdb merge ~/.Xresources &
 
-nitrogen --restore &
 xsetroot -cursor_name left_ptr &
-unclutter -root -reset -noevents &
-udiskue &
+nitrogen --restore &
 
 exec i3

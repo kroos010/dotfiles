@@ -1,10 +1,11 @@
-xterm*background: #151515
-xterm*foreground: #FFFFFF
+!--- xterm ---
+xterm*background:       #151515
+xterm*foreground:       #FFFFFF
 
-!---Colors----
+!--- colorscheme ---
 !black
 *color0:#050505
-*color8:#a9a9a9
+*color8:#A9A9A9
 !red
 *color1:#CC0000
 *color9:#EF2929
@@ -13,7 +14,7 @@ xterm*foreground: #FFFFFF
 *color10:#58A642
 !yellow
 *color3:#e0a524
-*color11:#edB85c
+*color11:#EDB85C
 !blue
 *color4:#1D576D
 *color12:#31788E
@@ -21,8 +22,9 @@ xterm*foreground: #FFFFFF
 *color5:#500000
 *color13:#590000
 !cyan
-*color6:#8edcff
-*color14:#87adfc
+*color6:#8EDCff
+*color14:#87ADFC
 !white
-*color7:#dedede
-*color15:#f2f2f2
+*color7:#DEDEDE
+*color15:#F2F2F2
+
