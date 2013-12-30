@@ -9,3 +9,4 @@ cp -rvu ~/.asoundrc $DFDIR
 cp -rvu ~/.Xresources $DFDIR
 cp -rvu ~/.xinitrc $DFDIR
 cp -rvu ~/.bashrc $DFDIR
+cp -rvu ~/.vimrc $DFDIR
