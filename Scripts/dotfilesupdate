@@ -1,12 +1,15 @@
 #!/bin/bash
 
-DFDIR=~/.dotfiles
+DFDIR=~/.dotfiles/
 
 
-cp -rvu ~/Scripts $DFDIR
-cp -rvu ~/.i3 $DFDIR
-cp -rvu ~/.asoundrc $DFDIR
-cp -rvu ~/.Xresources $DFDIR
-cp -rvu ~/.xinitrc $DFDIR
-cp -rvu ~/.bashrc $DFDIR
-cp -rvu ~/.vimrc $DFDIR
+cp -rvu ~/Scripts ${DFDIR}
+cp -rvu ~/.i3 ${DFDIR}
+cp -rvu ~/.asoundrc ${DFDIR}
+cp -rvu ~/.Xresources ${DFDIR}
+cp -rvu ~/.xinitrc ${DFDIR}
+cp -rvu ~/.bashrc ${DFDIR}
+cp -rvu ~/.vimrc ${DFDIR}
+
+# Weechat Configs
+cp -rvu ~/.weechat/weechat.conf ${DFDIR}.weechat/
