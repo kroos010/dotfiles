@@ -9,4 +9,8 @@ alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 # Add my custom paths
-PATH=$PATH:~/Scripts/
+PATH=$PATH:~/Scripts/i
+
+# Add applications i totally dont trust and run them under a seperate user
+alias skype='xhost +local: && su sucker -c skype'
+
