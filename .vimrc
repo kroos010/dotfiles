@@ -7,3 +7,8 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" Enable linenumber
+set nu
+
+" Disable linewrapping
+set nowrap
