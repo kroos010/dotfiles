@@ -11,6 +11,10 @@ cp -rvu ~/.xinitrc ${DFDIR}
 cp -rvu ~/.bashrc ${DFDIR}
 cp -rvu ~/.vimrc ${DFDIR}
 
+# MPD / NCMPCPP Configs
+cp -rvu ~/.config/mpd/mpd.conf ${DFDIR}.config/mpd/
+cp -rvu ~/.ncmpcpp/config ${DFDIR}.ncmpcpp/
+
 # Weechat Configs
 cp -rvu ~/.weechat/weechat.conf ${DFDIR}.weechat/
 

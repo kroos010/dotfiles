@@ -1,3 +1,5 @@
+# XINITRC LAPTOP ASUS
+
 [ -f ~/.Xresources ] && xrdb merge ~/.Xresources &
 
 if(xrandr | grep "HDMI1 connected" > /dev/null) then
@@ -6,5 +8,6 @@ fi
 
 xsetroot -cursor_name left_ptr &
 nitrogen --restore &
+mpd ~/.config/mpd/mpd.conf &
 
 exec i3
