@@ -3,7 +3,7 @@
 DFDIR=~/.dotfiles/
 
 
-cp -rvu ~/Scripts ${DFDIR}
+cp -rvu ~/.bin ${DFDIR}
 cp -rvu ~/.i3 ${DFDIR}
 cp -rvu ~/.asoundrc ${DFDIR}
 cp -rvu ~/.Xresources ${DFDIR}
