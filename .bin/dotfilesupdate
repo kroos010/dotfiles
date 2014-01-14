@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DFDIR=~/.dotfiles/
+
+# Folder checks
+[ ! -d "${DFDIR}.config/gtk-3.0/" ] && mkdir -p ${DFDIR}.config/gtk-3.0/
+
+# Folders
+cp -rvu ~/.bin                          ${DFDIR}
+cp -rvu ~/.i3                           ${DFDIR}
+cp -rvu ~/.gtkrc-2.0                    ${DFDIR}
+cp -rvu ~/.config/gtk-3.0/settings.ini  ${DFDIR}.config/gtk-3.0/
+
+# Files
+cp -rvu ~/.Xresources                   ${DFDIR}
+cp -rvu ~/.xinitrc                      ${DFDIR}
+cp -rvu ~/.bashrc                       ${DFDIR}
+cp -rvu ~/.vimrc                        ${DFDIR}
+
