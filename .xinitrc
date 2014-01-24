@@ -11,5 +11,6 @@ pulseaudio --start &
 xsetroot -cursor_name left_ptr &
 nitrogen --restore &
 udiskie &
+btsync --config ~/.config/btsync/btsync.conf &
 
 exec i3

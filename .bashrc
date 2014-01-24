@@ -10,3 +10,5 @@ PS1='[\u@\h \W]\$ '
 
 # Add custom paths
 PATH=$PATH:~/.bin/
+PATH=$PATH:~/Development/SDK/Android/tools/
+PATH=$PATH:~/Development/SDK/Android/platform-tools/
