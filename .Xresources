@@ -1,6 +1,21 @@
 !--- xterm ---		-
 xterm*foreground:       #F6F5EE
 xterm*background:       #1D1D1D
+xterm*borderWidth:      0
+xterm*locale:           true
+xterm*metaSendsEscape:  true
+
+!--- RXVT ---
+URxvt.depth:            32
+URxvt.background:       #1D1D1DDD
+URxct.foreground:       #F6F6F6
+
+!--- Xft resources ---
+Xft.dpi:                96
+Xft.antialias:          true
+Xft.rgba:               rgb
+Xft.hinting:            true
+Xft.hintstyle:          hintslight
 
 !--- colorscheme ---
 ! Monokai colors
