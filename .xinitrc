@@ -10,7 +10,7 @@ fi
 $TERMINAL=xterm
 
 pulseaudio --start &
-#[ ! -s ~/.config/mpd/pid ] && mpd ~/.config/mpd/mpd.conf &
+mpd ~/.config/mpd/mpd.conf &
 #xcompmgr -c & # xcompmgr is slow :(
 xsetroot -cursor_name left_ptr &
 nitrogen --restore &
