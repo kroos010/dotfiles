@@ -1,16 +1,23 @@
-!--- xterm ---      -
+!--- xterm ---
 xterm*background:       #101010
 xterm*foreground:       #F6F5EE
 xterm*cursorColor:      #F6F5EE
-
 xterm*borderWidth:      0
 xterm*locale:           true
 xterm*metaSendsEscape:  true
 
-!--- RXVT ---
+!--- URxvt ---
 URxvt.depth:            32
-URxvt.background:       #1D1D1DDD
-URxct.foreground:       #F6F6F6
+URxvt.background:       [85]#101010
+URxvt.foreground:       #F6F5EE
+!URxvt*transparent:      true
+!URxvt*shading:          30
+URxvt.scrollBar:        false
+!URxvt.font:             3x7
+
+!URxvt.depth:            32
+!URxvt.background:       #1D1D1DDD
+!URxct.foreground:       #F6F6F6
 
 !--- Xft resources ---
 Xft.dpi:                96
