@@ -1,0 +1,4 @@
+#!/bin/bash
+scrot /tmp/lockscreenshot.png
+convert /tmp/lockscreenshot.png -blur 0x20 /tmp/lockscreenshot-blur.png
+i3lock -u -i /tmp/lockscreenshot-blur.png
