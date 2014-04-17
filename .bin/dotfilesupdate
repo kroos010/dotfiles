@@ -5,9 +5,9 @@ DFDIR=~/.dotfiles/
 find . -maxdepth 1 -type f -exec cp -rvu {} ${DFDIR}.bin/ \;
 
 ## Configuration files and folders
-cp -rvu ~/.config/bspwm ${DFDIR}
-cp -rvu ~/.config/sxhkd ${DFDIR}
-cp -rvu ~/.config/compton ${DFDIR}
+cp -rvu ~/.config/bspwm ${DFDIR}.config/
+cp -rvu ~/.config/sxhkd ${DFDIR}.config/
+cp -rvu ~/.config/compton ${DFDIR}.config/
 
 ## Files in my home root
 cp -rvu ~/.Xresources ${DFDIR}
