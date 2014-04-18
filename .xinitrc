@@ -1,7 +1,7 @@
 ## Some settings i use
 LOCKER=xlock
 LOCKTIME=10
-WALLPAPER=$HOME/Pictures/wallpapers/wallpaper-588182.jpg
+WALLPAPER=$HOME/Pictures/wallpapers/wallpaper-2872582.jpg
 
 ## X settings
 xrdb -merge $HOME/.Xresources

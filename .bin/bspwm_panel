@@ -1,0 +1,23 @@
+#!/bin/sh
+
+if [ $(pgrep -cx bspwm_panel) -gt 1 ] ; then
+	printf "%s\n" "The bspwm_panel is already running." >&2
+	exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc config top_padding $PANEL_HEIGHT
+
+bspc control --substribe > "$PANEL_FIFO" &
+$HOME/.bin/xtitle/bin/xtitle -sf 'T%s' > "$PANEL_FIFO" &
+#clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
+
+. bspwm_panel_colors
+
+cat "$PANEL_FIFO" | bspwm_panel_bar | $HOME/.bin/bar/bin/bar -g x$PANEL_HEIGHT -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+
+wait
