@@ -6,7 +6,7 @@
 
 # Settings for the panel
 export PANEL_FIFO="/tmp/panel-fifo"
-export PANEL_HEIGHT=24
+export PANEL_HEIGHT=18
 
 # Add scripts to the path
 export PATH=$PATH:$HOME/.bin

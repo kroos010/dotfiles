@@ -1,18 +1,18 @@
 #!/bin/bash
-DFDIR=~/.dotfiles/
+DFDIR=$HOME/.dotfiles/
 
 ## Executable scripts, exclude folders wich contains binary files
-find . -maxdepth 1 -type f -exec cp -rvu {} ${DFDIR}.bin/ \;
+find $HOME/.bin/ -maxdepth 1 -type f -exec cp -rvu {} ${DFDIR}.bin/ \;
 
 ## Configuration files and folders
-cp -rvu ~/.config/bspwm ${DFDIR}.config/
-cp -rvu ~/.config/sxhkd ${DFDIR}.config/
-cp -rvu ~/.config/compton ${DFDIR}.config/
+cp -rvu $HOME/.config/bspwm ${DFDIR}.config/
+cp -rvu $HOME/.config/sxhkd ${DFDIR}.config/
+cp -rvu $HOME/.config/compton ${DFDIR}.config/
 
 ## Files in my home root
-cp -rvu ~/.Xresources ${DFDIR}
-cp -rvu ~/.xinitrc ${DFDIR}
-cp -rvu ~/.bash_profile ${DFDIR}
+cp -rvu $HOME/.Xresources ${DFDIR}
+cp -rvu $HOME/.xinitrc ${DFDIR}
+cp -rvu $HOME/.bash_profile ${DFDIR}
 
 
 

@@ -3,7 +3,9 @@ Xft.dpi:                96
 Xft.antialias:          true
 Xft.rgba:               rgb
 Xft.hinting:            true
+Xft.autohint:           false
 Xft.hintstyle:          hintslight
+Xft.lcdfilter:          lcddefault
 
 !--- URxvt
 URxvt.scrollBar:        false
@@ -17,6 +19,22 @@ URxvt.depth:            32
 URxvt.foreground:       #FFFFFF
 URxvt.background:       [85]#000000
 URxvt.cursorColor:      #00FF00
+URxvt*cursorBlink:      true
+
+!URxvt*font:            -*-lemon-*-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*boldFont:        -*-lemon-*-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*italicFont:      -*-lemon-*-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*bolditalicFont:  -*-lemon-*-*-*-*-*-*-*-*-*-*-*-*
+
+!--- Quick fix to get rid of a bug: https://github.com/neeee/tewi-font/issues/5
+URxvt*font:             -lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1, \
+						-lucy-tewi2a-medium-r-normal--11-90-75-75-p-58-iso10646-1
+URxvt*boldFont:         -lucy-tewi-bold-r-normal--11-90-75-75-p-58-iso10646-1, \
+						-lucy-tewi2a-bold-r-normal--11-90-75-75-p-58-iso10646-1
+URxvt*italicFont:       -lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1, \
+						-lucy-tewi2a-medium-r-normal--11-90-75-75-p-58-iso10646-1
+URxvt*bolditalicFont:   -lucy-tewi-bold-r-normal--11-90-75-75-p-58-iso10646-1, \
+						-lucy-tewi2a-bold-r-normal--11-90-75-75-p-58-iso10646-1
 
 !--- Colors
 ! Molokai colors

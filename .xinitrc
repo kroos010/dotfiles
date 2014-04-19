@@ -1,7 +1,13 @@
 ## Some settings i use
 LOCKER=xlock
 LOCKTIME=10
-WALLPAPER=$HOME/Pictures/wallpapers/wallpaper-2872582.jpg
+WALLPAPER=$HOME/Pictures/wallpapers/wallpaper-1075662.jpg
+
+## Adding fonts to the path
+xset +fp /usr/share/fonts/local
+xset +fp /usr/share/fonts/misc
+xset +fp $HOME/.fonts
+xset fp rehash
 
 ## X settings
 xrdb -merge $HOME/.Xresources
