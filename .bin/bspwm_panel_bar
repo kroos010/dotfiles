@@ -20,6 +20,10 @@ while read -r line; do
             var_cpu="${line#?}"
             ;;
 
+        M*) # MPD now playing
+            var_mpd="${line#?}"
+            ;;
+
         T*) # xtitle output
             title="${line#?}"
             ;;
@@ -69,11 +73,12 @@ printf "%s\n" "%{l}\
 $wm_infos \
 %{F${COLOR_FOREGROUND}}\
 %{r}⮃ \
-⭯ none ⮃ \
+⭯ $var_mpd ⮃ \
 ⭟ 0 ⮃ \
 ⭮ 0, 2, 3 ⮃ \
 ⭥ $var_cpu ⮃ \
 ⭦ $var_useram ⮃ \
+%{F#FFFF0000}⮂%{B#FFFF0000}%{F#FFFFFFFF} POWERLINE TEXT HERE %{F${COLOR_BACKGROUND}}⮂%{F${COLOR_FOREGROUND}}%{B${COLOR_BACKGROUND}} \
 %{fa}⮏%{fm} $var_battery ⮃ \
 %{fm}⭧ $var_datetime "
 

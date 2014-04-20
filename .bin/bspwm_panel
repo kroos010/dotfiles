@@ -55,11 +55,23 @@ panel_cpu()
     echo "  5%%,  34%%,  100%%, 100%%"
 }
 
+panel_mpd()
+{
+    #playing=$(ncmpcpp --now-playing "%t - %a")
+    playing=$(ncmpcpp --now-playing "%t")
+    if [ "$playing" = "" ]; then
+        echo "not playing"
+    else
+        echo $playing
+    fi
+}
+
 while true; do
     echo "D" $(panel_clock) > "$PANEL_FIFO"
     echo "R" $(panel_process $(panel_use_ram)) > "$PANEL_FIFO"
     echo "B" $(panel_process $(panel_battery)) > "$PANEL_FIFO"
     echo "C" $(panel_cpu) > "$PANEL_FIFO"
+    echo "M" $(panel_mpd) > "$PANEL_FIFO"
     sleep 0.7s
 done &
 
