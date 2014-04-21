@@ -17,6 +17,11 @@ savefiles()
     rsync -r --progress --human-readable --update --checksum \
         $HOME/.config/{bspwm,sxhkd,compton} \
         "$DIR_DOTFILES".config/
+
+    # Fonts files
+    rsync --progress --human-readable --update --checksum \
+        $HOME/.fonts/* \
+        "$DIR_DOTFILES".fonts/
 }
 
 restorefiles()
