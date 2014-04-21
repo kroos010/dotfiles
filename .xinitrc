@@ -1,7 +1,7 @@
 ## Some settings i like
 LOCKER=xlock
 LOCKTIME=10
-WALLPAPER=$HOME/Pictures/wallpapers/wallpaper-1075662.jpg
+WALLPAPER=$HOME/.config/wallpaper.jpg
 
 ## Adding fonts to the path
 xset +fp /usr/share/fonts/local

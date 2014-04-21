@@ -15,7 +15,7 @@ savefiles()
 
     # Files in the config folder
     rsync -r --progress --human-readable --update --checksum \
-        $HOME/.config/{bspwm,sxhkd,compton} \
+        $HOME/.config/{bspwm,sxhkd,compton,wallpaper.jpg} \
         "$DIR_DOTFILES".config/
 
     # Fonts files
