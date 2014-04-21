@@ -38,9 +38,14 @@ restorefiles()
 
     # Files in the config folder
     rsync -r --progress --human-readable --update --checksum \
-        "$DIR_DOTFILES".config/{bspwm,sxhkd,compton} \
+        "$DIR_DOTFILES".config/{bspwm,sxhkd,compton,wallpaper.jpg} \
         $HOME/.config/
 
+    # Fonts files
+    rsync --progress --human-readable --update --checksum \
+        "$DIR_DOTFILES".fonts/* \
+        $HOME/.fonts/
+        
 }
 
 gitpush()
