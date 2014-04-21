@@ -38,9 +38,33 @@ restorefiles()
 
 }
 
+gitpush()
+{
+    if [[ -z "$1" ]]; then
+        echo "Usage: dotfilesupdate gitpush <comment>"
+        exit 1
+    fi
+    CURDIR=$(pwd)
+    cd $DIR_DOTFILES
+    git add .
+    git commit -m "$1"
+    git push
+    cd $CURDIR
+}
+
+gitpull()
+{
+    CURDIR=$(pwd)
+    cd $DIR_DOTFILES
+    git pull
+    cd $CURDIR
+}
+
 case $1 in
     "save") savefiles ;;
     "restore") restorefiles ;;
+    "push" ) gitpush $2 ;;
+    "pull" ) gitpull ;;
     *)
         echo "Usage: $1 <save|restore>"
         exit 1
