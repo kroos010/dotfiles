@@ -1,32 +1,48 @@
 #!/bin/bash
-DFDIR=$HOME/.dotfiles/
+DIR_DOTFILES=$HOME/.dotfiles/
 
 savefiles()
 {
-	## Executable scripts, exclude folders wich contains binary files
-	find $HOME/.bin/ -maxdepth 1 -type f -exec cp -rvu {} ${DFDIR}.bin/ \;
+    # ~/.bin (files only)
+    rsync --progress --human-readable --update --checksum \
+        $HOME/.bin/* \
+        "$DIR_DOTFILES".bin/
 
-	## Configuration files and folders
-	cp -rvu $HOME/.config/bspwm ${DFDIR}.config/
-	cp -rvu $HOME/.config/sxhkd ${DFDIR}.config/
-	cp -rvu $HOME/.config/compton ${DFDIR}.config/
+    # Files in the home folder
+    rsync --progress --human-readable --update --checksum \
+        $HOME/{.Xresources,.xinitrc,.bash_profile} \
+        "$DIR_DOTFILES"
 
-	## Files in my home root
-	cp -rvu $HOME/.Xresources ${DFDIR}
-	cp -rvu $HOME/.xinitrc ${DFDIR}
-	cp -rvu $HOME/.bash_profile ${DFDIR}
+    # Files in the config folder
+    rsync -r --progress --human-readable --update --checksum \
+        $HOME/.config/{bspwm,sxhkd,compton} \
+        "$DIR_DOTFILES".config/
 }
 
 restorefiles()
 {
-	echo "Not supported yet..."
+    # ~/.bin (files only)
+    rsync --progress --human-readable --update --checksum \
+        "$DIR_DOTFILES".bin/* \
+        $HOME/.bin/
+
+    # Files in the home folder
+    rsync --progress --human-readable --update --checksum \
+        "$DIR_DOTFILES"/{.Xresources,.xinitrc,.bash_profile} \
+        $HOME/
+
+    # Files in the config folder
+    rsync -r --progress --human-readable --update --checksum \
+        "$DIR_DOTFILES".config/{bspwm,sxhkd,compton} \
+        $HOME/.config/
+
 }
 
 case $1 in
-	"save") savefiles ;;
-	"restore") restorefiles ;;
-	*)
-		echo "Usage: $1 <save|restore>"
-		exit 1
-		;;
+    "save") savefiles ;;
+    "restore") restorefiles ;;
+    *)
+        echo "Usage: $1 <save|restore>"
+        exit 1
+        ;;
 esac

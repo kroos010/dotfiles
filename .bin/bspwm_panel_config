@@ -1,15 +1,17 @@
 #!/bin/sh
 
-COLOR_BACKGROUND='#BB000000'
+COLOR_BACKGROUND='#DD000000'
 COLOR_FOREGROUND='#FFBBBBBB'
 
 COLOR_BLUE='#FF0587A0'
+COLOR_RED='#FFFF0000'
+COLOR_WHITE='#FFFFFFFF'
 
 panel_execute()
 {
 	case $1 in
 		"lockscreen") # Start xlock
-			eval xlock &
+			xlock &
 			;;
 	esac
 }
@@ -20,42 +22,39 @@ panel_render_datetime()
 	echo $(date +'%a %d-%m-%y %H:%M:%S')
 }
 
-panel_render_unreadmsg()
+panel_render_battery()
 {
-	# Output email: mail@kevinvdburgt.com
-	count_a=$(cat /tmp/inboxunreadcount_mail@kevinvdburgt.com)
-
-	echo "gmail: $count_a zdev: $count_a"
-}
-
-panel_render_memoryusage()
-{
-	echo '__0%%'
-}
-
-panel_render_cpuusage()
-{
-	echo '__0%% __0%% __0%% __0%%'
+	battery=$(acpi --battery | cut -d' ' -f3 | sed 's/,//')
+	if [ "$battery" == "" ]; then
+		echo 'A0'
+	elif [ "$battery" == "Charging" ]; then
+		echo 'C1'
+	elif [ "$battery" == "Discharging" ]; then
+		echo 'D2'
+	else
+		echo 'N3'
+	fi
 }
 
 panel_render_music()
 {
-	echo 'Nightcore - Ladieda'
+	echo $(ncmpcpp --now-playing '%t - %a')
 }
 
 panel_process()
 {
+	echo $1
     case $1 in
-        100) echo "——————————%{F#FF000000}%{F${COLOR_FOREGROUND}}" ;;
-     [0-9]) echo "%{F#FF0587a0}%——————————%{F${COLOR_FOREGROUND}}" ;;
-        1*) echo "—%{F#FF000000}%—————————%{F${COLOR_FOREGROUND}}" ;;
-        2*) echo "——%{F#FF000000}%————————%{F${COLOR_FOREGROUND}}" ;;
-        3*) echo "———%{F#FF000000}%———————%{F${COLOR_FOREGROUND}}" ;;
-        4*) echo "————%{F#FF000000}%——————%{F${COLOR_FOREGROUND}}" ;;
-        5*) echo "—————%{F#FF000000}%—————%{F${COLOR_FOREGROUND}}" ;;
-        6*) echo "——————%{F#FF000000}%————%{F${COLOR_FOREGROUND}}" ;;
-        7*) echo "———————%{F#FF000000}%———%{F${COLOR_FOREGROUND}}" ;;
-        8*) echo "————————%{F#FF000000}%——%{F${COLOR_FOREGROUND}}" ;;
-        9*) echo "—————————%{F#FF000000}%—%{F${COLOR_FOREGROUND}}" ;;
+        100) echo "%{F#$3}——————————%{F#$2}" ;;
+     [0-9]) echo "%{F#$3}%{F#$2}%——————————" ;;
+        1*) echo "%{F#$3}—%{F#$2}%—————————" ;;
+        2*) echo "%{F#$3}——%{F#$2}%————————" ;;
+        3*) echo "%{F#$3}———%{F#$2}%———————" ;;
+        4*) echo "%{F#$3}————%{F#$2}%——————" ;;
+        5*) echo "%{F#$3}—————%{F#$2}%—————" ;;
+        6*) echo "%{F#$3}——————%{F#$2}%————" ;;
+        7*) echo "%{F#$3}———————%{F#$2}%———" ;;
+        8*) echo "%{F#$3}————————%{F#$2}%——" ;;
+        9*) echo "%{F#$3}—————————%{F#$2}%—" ;;
     esac
 }

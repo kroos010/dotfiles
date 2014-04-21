@@ -1,4 +1,4 @@
-## Some settings i use
+## Some settings i like
 LOCKER=xlock
 LOCKTIME=10
 WALLPAPER=$HOME/Pictures/wallpapers/wallpaper-1075662.jpg

@@ -21,18 +21,16 @@ bspc control --subscribe > "$PANEL_FIFO" &
 $HOME/.bin/xtitle/bin/xtitle -sf 'T%s' > "$PANEL_FIFO" &
 
 while true; do
-    ##echo "DAT" $(panel_render_datetime) > "$PANEL_FIFO"
-    ##echo "URM" $(panel_render_unreadmsg) > "$PANEL_FIFO"
-    ##echo "MEM" $(panel_render_memoryusage) > "$PANEL_FIFO"
-    ##echo "CPU" $(panel_render_cpuusage) > "$PANEL_FIFO"
-    ##echo "MUS" $(panel_render_music) > "$PANEL_FIFO"
+    echo "DAT" $(panel_render_datetime) > "$PANEL_FIFO"
+    echo "MUS" "$(panel_render_music)" > "$PANEL_FIFO"
 
-    ##echo "D" $(panel_clock) > "$PANEL_FIFO"
-    ##echo "R" $(panel_process $(panel_use_ram)) > "$PANEL_FIFO"
-    ##echo "B" $(panel_process $(panel_battery)) > "$PANEL_FIFO"
-    ##echo "C" $(panel_cpu) > "$PANEL_FIFO"
-    ##echo "M" $(panel_mpd) > "$PANEL_FIFO"
     sleep 0.7s
+done &
+
+while true; do
+    #echo "ACC" $(panel_render_battery) > "$PANEL_FIFO" # LAPTOP ONLY !
+
+    sleep 5.0s
 done &
 
 cat "$PANEL_FIFO" | \
@@ -43,7 +41,7 @@ $HOME/.bin/bar/bin/bar \
     -B "$COLOR_BACKGROUND" \
     -f "-lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1,-benis-uushi-medium-r-normal--11-90-75-75-p-58-iso10646-1" | \
 while read line; do
-    panel_execute $line &
+    panel_execute $line
 done &
 
 wait

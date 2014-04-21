@@ -1,4 +1,4 @@
 #!/bin/bash
 scrot /tmp/lockscreenshot.png
 convert /tmp/lockscreenshot.png -blur 0x5 /tmp/lockscreenshot-blur.png
-i3lock -i /tmp/lockscreenshot-blur.png
+i3lock -u -i /tmp/lockscreenshot-blur.png
