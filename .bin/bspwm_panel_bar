@@ -4,32 +4,33 @@
 
 while read -r line; do
     case $line in
-        D*) # clock output
-            var_datetime="${line#?}"
+        DAT*) # panel_render_datetime
+            var_datetime=" ⮃ %{F${COLOR_BLUE}}⭧ %{F${COLOR_FOREGROUND}}${line#???}"
             ;;
 
-        R*) # RAM in use
-            var_useram="${line#?}"
+        URM*) # panel_render_unreadmsg
+            var_unreadmsg=" ⮃ %{F${COLOR_BLUE}}⭮ %{F${COLOR_FOREGROUND}}${line#???}"
             ;;
 
-        B*) # Battery power
-            var_battery="${line#?}"
+        MEM*) # panel_render_memoryusage
+            var_memoryusage=" ⮃ %{F${COLOR_BLUE}}⭦ %{F${COLOR_FOREGROUND}}${line#???}"
             ;;
 
-        C*) # CPU usage
-            var_cpu="${line#?}"
+        CPU*) # panel_render_cpuusage
+            var_cpuusage=" ⮃ %{F${COLOR_BLUE}}⭥ %{F${COLOR_FOREGROUND}}${line#???}"
             ;;
 
-        M*) # MPD now playing
-            var_mpd="${line#?}"
+        MUS*) # panel_render_music
+            var_music=" ⮃ %{F${COLOR_BLUE}}⭯ %{F${COLOR_FOREGROUND}}${line#???}"
             ;;
 
         T*) # xtitle output
-            title="${line#?}"
+            var_xtitle="${line#?}"
             ;;
 
         W*) # bspwm internal state
-            wm_infos=""
+            bspwminfo=""
+            bspwmlayout="[ ]"
             IFS=':'
             set -- ${line#?}
             while [ $# -gt 0 ] ; do
@@ -37,32 +38,31 @@ while read -r line; do
                 name=${item#?}
                 case $item in
                     O*) # focused occupied desktop
-                        wm_infos="$wm_infos %{F${COLOR_FOCUSED_FG}}$name⠁%{F${COLOR_FOREGROUND}}⮁"
+                        bspwminfo="$bspwminfo %{F${COLOR_BLUE}}$name⠁%{F${COLOR_FOREGROUND}}⮁"
                         ;;
 
                     F*) # focused free desktop
-                        wm_infos="$wm_infos %{F${COLOR_FOCUSED_FG}}$name %{F${COLOR_FOREGROUND}}⮁"
+                        bspwminfo="$bspwminfo %{F${COLOR_BLUE}}$name %{F${COLOR_FOREGROUND}}⮁"
                         ;;
 
                     U*) # focused urgent desktop
-                        wm_infos="$wm_infos %{F${COLOR_FOREGROUND}}$name⠁%{F${COLOR_FOREGROUND}}⮁"
+                        bspwminfo="$bspwminfo %{F${COLOR_RED}}$name⠁%{F${COLOR_FOREGROUND}}⮁"
                         ;;
 
                     o*) # occupied desktop
-                        wm_infos="$wm_infos %{F${COLOR_FOREGROUND}}$name⠁%{F${COLOR_FOREGROUND}}⮁"
+                        bspwminfo="$bspwminfo %{F${COLOR_FOREGROUND}}$name⠁%{F${COLOR_FOREGROUND}}⮁"
                         ;;
 
                     f*) # free desktop
-                        wm_infos="$wm_infos %{F${COLOR_FOREGROUND}}$name %{F${COLOR_FOREGROUND}}⮁"
+                        bspwminfo="$bspwminfo %{F${COLOR_FOREGROUND}}$name %{F${COLOR_FOREGROUND}}⮁"
                         ;;
 
                     u*) # urgent desktop
-                        wm_infos="$wm_infos %{F${COLOR_FOREGROUND}}$name⠁%{F${COLOR_FOREGROUND}}⮁"
+                        bspwminfo="$bspwminfo %{F${COLOR_RED}}$name⠁%{F${COLOR_FOREGROUND}}⮁"
                         ;;
 
                     L*) # layout
-                        #layout=$(printf "%s" "${name}" | sed 's/\(.\).*/\U\1/')
-                        #wm_infos="$wm_infos [$layout]"
+                        bspwmlayout=$(printf "%s" "${name}" | sed 's/\(.\).*/\U\1/')
                         ;;
                 esac
                 shift
@@ -70,17 +70,31 @@ while read -r line; do
     esac
 
 printf "%s\n" "%{l}\
-$wm_infos \
-%{F${COLOR_FOREGROUND}}\
-%{r}⮃ \
-⭯ $var_mpd ⮃ \
-⭟ 0 ⮃ \
-⭮ 0, 2, 3 ⮃ \
-⭥ $var_cpu ⮃ \
-⭦ $var_useram ⮃ \
-%{F#FFFF0000}⮂%{B#FFFF0000}%{F#FFFFFFFF} POWERLINE TEXT HERE %{F${COLOR_BACKGROUND}}⮂%{F${COLOR_FOREGROUND}}%{B${COLOR_BACKGROUND}} \
-%{fa}⮏%{fm} $var_battery ⮃ \
-%{fm}⭧ $var_datetime "
+%{A:lockscreen:} ⭤ %{A}\
+[$bspwmlayout]$bspwminfo $var_xtitle\
+INTERNET ⮁\
+%{r}\
+\
+$var_music\
+$var_cpuusage\
+$var_memoryusage\
+$var_unreadmsg\
+$var_datetime\
+ "
+
+#%{F${COLOR_BACKGROUND}}%{B${COLOR_BLUE}}⮀ %{F#FFFFFFFF} POWERLINE TEXT HERE %{F${COLOR_BLUE}}%{B${COLOR_BACKGROUND}}⮀%{F${COLOR_FOREGROUND}}%{B${COLOR_BACKGROUND}} \
+#printf "%s\n" "%{l}\
+#$wm_infos \
+#%{F${COLOR_FOREGROUND}}\
+#%{r}⮃ \
+#⭯ $var_mpd ⮃ \
+#⭟ 0 ⮃ \
+#⭮ 0, 2, 3 ⮃ \
+#⭥ $var_cpu ⮃ \
+#⭦ $var_useram ⮃ \
+#%{F#FFFF0000}⮂%{B#FFFF0000}%{F#FFFFFFFF} POWERLINE TEXT HERE %{F${COLOR_BACKGROUND}}⮂%{F${COLOR_FOREGROUND}}%{B${COLOR_BACKGROUND}} \
+#%{fa}⮏%{fm} $var_battery ⮃ \
+#%{fm}⭧ $var_datetime "
 
 ## Powerline example
 #%{F#FFFF0000}⮂%{B#FFFF0000}%{F#FFFFFFFF} POWERLINE TEXT HERE %{F${COLOR_BACKGROUND}}⮂%{F${COLOR_FOREGROUND}}%{B${COLOR_BACKGROUND}} \

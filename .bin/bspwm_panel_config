@@ -1,25 +1,61 @@
-COLOR_FOREGROUND='#A3A6AB'
-#COLOR_BACKGROUND='#000000'
-COLOR_FOCUSED_OCCUPIED_FG='#F6F9FF'
-COLOR_FOCUSED_OCCUPIED_BG='#5C5955'
-COLOR_FOCUSED_FREE_FG='#F6F9FF'
-COLOR_FOCUSED_FREE_BG='#6D561C'
-COLOR_FOCUSED_URGENT_FG='#000000'
-COLOR_FOCUSED_URGENT_BG='#F9A299'
-COLOR_OCCUPIED_FG='#A3A6AB'
-COLOR_OCCUPIED_BG='#000000'
-COLOR_FREE_FG='#6F7277'
-COLOR_FREE_BG='#000000'
-COLOR_URGENT_FG='#F9A299'
-COLOR_URGENT_BG='#000000'
-COLOR_LAYOUT_FG='#A3A6AB'
-COLOR_LAYOUT_BG='#000000'
-COLOR_TITLE_FG='#A3A6AB'
-COLOR_TITLE_BG='#000000'
-COLOR_STATUS_FG='#A3A6AB'
-COLOR_STATUS_BG='#000000'
+#!/bin/sh
 
-COLOR_FOREGROUND='#FFBBBBBB'
 COLOR_BACKGROUND='#BB000000'
+COLOR_FOREGROUND='#FFBBBBBB'
 
-COLOR_FOCUSED_FG='#FF0587A0'
+COLOR_BLUE='#FF0587A0'
+
+panel_execute()
+{
+	case $1 in
+		"lockscreen") # Start xlock
+			eval xlock &
+			;;
+	esac
+}
+
+panel_render_datetime()
+{
+	# Output: Sun 20-04-14 21:43:00
+	echo $(date +'%a %d-%m-%y %H:%M:%S')
+}
+
+panel_render_unreadmsg()
+{
+	# Output email: mail@kevinvdburgt.com
+	count_a=$(cat /tmp/inboxunreadcount_mail@kevinvdburgt.com)
+
+	echo "gmail: $count_a zdev: $count_a"
+}
+
+panel_render_memoryusage()
+{
+	echo '__0%%'
+}
+
+panel_render_cpuusage()
+{
+	echo '__0%% __0%% __0%% __0%%'
+}
+
+panel_render_music()
+{
+	echo 'Nightcore - Ladieda'
+}
+
+panel_process()
+{
+    case $1 in
+        100) echo "——————————%{F#FF000000}%{F${COLOR_FOREGROUND}}" ;;
+     [0-9]) echo "%{F#FF0587a0}%——————————%{F${COLOR_FOREGROUND}}" ;;
+        1*) echo "—%{F#FF000000}%—————————%{F${COLOR_FOREGROUND}}" ;;
+        2*) echo "——%{F#FF000000}%————————%{F${COLOR_FOREGROUND}}" ;;
+        3*) echo "———%{F#FF000000}%———————%{F${COLOR_FOREGROUND}}" ;;
+        4*) echo "————%{F#FF000000}%——————%{F${COLOR_FOREGROUND}}" ;;
+        5*) echo "—————%{F#FF000000}%—————%{F${COLOR_FOREGROUND}}" ;;
+        6*) echo "——————%{F#FF000000}%————%{F${COLOR_FOREGROUND}}" ;;
+        7*) echo "———————%{F#FF000000}%———%{F${COLOR_FOREGROUND}}" ;;
+        8*) echo "————————%{F#FF000000}%——%{F${COLOR_FOREGROUND}}" ;;
+        9*) echo "—————————%{F#FF000000}%—%{F${COLOR_FOREGROUND}}" ;;
+    esac
+}

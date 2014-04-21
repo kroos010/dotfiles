@@ -86,6 +86,10 @@ super + Return
 super + space
 	dmenu_run
 
+super + d
+	dmenu_run -l 5 -nb '#111111' -nf '#FFFFFF' -sb '#0587A0' -sf '#000000'
+
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd

@@ -14,64 +14,24 @@ mkfifo "$PANEL_FIFO"
 
 bspc config top_padding $PANEL_HEIGHT
 
+## Subsribe the BSPWM status to the FIFO file.
 bspc control --subscribe > "$PANEL_FIFO" &
+
+## Send the current focused window title.
 $HOME/.bin/xtitle/bin/xtitle -sf 'T%s' > "$PANEL_FIFO" &
 
-panel_process()
-{
-    case $1 in
-        100) echo "——————————%{F#FF000000}%{F${COLOR_FOREGROUND}}" ;;
-     [0-9]) echo "%{F#FF0587a0}%——————————%{F${COLOR_FOREGROUND}}" ;;
-        1*) echo "—%{F#FF000000}%—————————%{F${COLOR_FOREGROUND}}" ;;
-        2*) echo "——%{F#FF000000}%————————%{F${COLOR_FOREGROUND}}" ;;
-        3*) echo "———%{F#FF000000}%———————%{F${COLOR_FOREGROUND}}" ;;
-        4*) echo "————%{F#FF000000}%——————%{F${COLOR_FOREGROUND}}" ;;
-        5*) echo "—————%{F#FF000000}%—————%{F${COLOR_FOREGROUND}}" ;;
-        6*) echo "——————%{F#FF000000}%————%{F${COLOR_FOREGROUND}}" ;;
-        7*) echo "———————%{F#FF000000}%———%{F${COLOR_FOREGROUND}}" ;;
-        8*) echo "————————%{F#FF000000}%——%{F${COLOR_FOREGROUND}}" ;;
-        9*) echo "—————————%{F#FF000000}%—%{F${COLOR_FOREGROUND}}" ;;
-    esac
-}
-
-panel_clock()
-{
-    echo $(date +'%a %d-%m-%y %H:%M:%S')
-}
-
-panel_use_ram()
-{
-    usage=$(free | grep Mem | awk '{print $3/$2 * 100.0}')
-    echo $usage
-}
-
-panel_battery()
-{
-    echo 0
-}
-
-panel_cpu()
-{
-    echo "  5%%,  34%%,  100%%, 100%%"
-}
-
-panel_mpd()
-{
-    #playing=$(ncmpcpp --now-playing "%t - %a")
-    playing=$(ncmpcpp --now-playing "%t")
-    if [ "$playing" = "" ]; then
-        echo "not playing"
-    else
-        echo $playing
-    fi
-}
-
 while true; do
-    echo "D" $(panel_clock) > "$PANEL_FIFO"
-    echo "R" $(panel_process $(panel_use_ram)) > "$PANEL_FIFO"
-    echo "B" $(panel_process $(panel_battery)) > "$PANEL_FIFO"
-    echo "C" $(panel_cpu) > "$PANEL_FIFO"
-    echo "M" $(panel_mpd) > "$PANEL_FIFO"
+    ##echo "DAT" $(panel_render_datetime) > "$PANEL_FIFO"
+    ##echo "URM" $(panel_render_unreadmsg) > "$PANEL_FIFO"
+    ##echo "MEM" $(panel_render_memoryusage) > "$PANEL_FIFO"
+    ##echo "CPU" $(panel_render_cpuusage) > "$PANEL_FIFO"
+    ##echo "MUS" $(panel_render_music) > "$PANEL_FIFO"
+
+    ##echo "D" $(panel_clock) > "$PANEL_FIFO"
+    ##echo "R" $(panel_process $(panel_use_ram)) > "$PANEL_FIFO"
+    ##echo "B" $(panel_process $(panel_battery)) > "$PANEL_FIFO"
+    ##echo "C" $(panel_cpu) > "$PANEL_FIFO"
+    ##echo "M" $(panel_mpd) > "$PANEL_FIFO"
     sleep 0.7s
 done &
 
@@ -81,5 +41,9 @@ $HOME/.bin/bar/bin/bar \
     -g x$PANEL_HEIGHT \
     -F "$COLOR_FOREGROUND" \
     -B "$COLOR_BACKGROUND" \
-    -f "-lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1,-benis-uushi-medium-r-normal--11-90-75-75-p-58-iso10646-1" &
+    -f "-lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1,-benis-uushi-medium-r-normal--11-90-75-75-p-58-iso10646-1" | \
+while read line; do
+    panel_execute $line &
+done &
+
 wait
