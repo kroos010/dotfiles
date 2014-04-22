@@ -1,92 +1,41 @@
 #!/bin/bash
 
-FFX_MONO="1"            # mono
-FFX_DUAL="2"            # dual
-FFX_HW="hw:1,0"         # alsa; run 'cat /proc/asound/pcm' to change to the correct numbers
-FFX_PULSE="pulse"       # pulseaudio; might have to install pavucontrol to change volume
-FFX_FPS="30"            # frams per second
-FFX_RES="1920x1080"     # record resolution
-FFX_AUDIO="libmp3lame"  # audio codec
-FFX_VIDEO="libx264"     # video codec
-FFX_PRESET="ultrafast"  # preset error? run 'x264 -h' replace with fast,superfast, slow ..etc
-FFX_CRF="0"             # i dont kwow what is does haha...
-FFX_THREADS="0"         # max running threads
-FFX_SCALE="1920x1080"   # scale output resolution
-
-showsyntax()
+stream_twitch()
 {
-    echo "livestream usage: <twitch | disk [filename]>"
-}
+    # Find stream key for twitch
+    if [ -f $HOME/.twitch_key ]; then
+        STREAM_KEY=$(cat $HOME/.twitch_key)
+    elif [ -f $HOME/.config/twitch_key ]; then
+        STREAM_KEY=$(cat $HOME/.config/twitch_key)
+    else
+        echo "No twitch stream key found. Please create a file in your home directory called '.twitch_key'"
+        exit 1
+    fi
 
-record_fullscreen()
-{
     ffmpeg \
-        -f x11grab -s 1920x1080 -r 30 -i :0.0 -vcodec libx264 \
-        -f flv "rtmp://live.justin.tv/app/live_20008920_0X0yebSelZagw2xxuIwSUnIsWi3CXX"
-    #ffmpeg \
-    #    -f x11grab -s 1920x1080 -r 30 -i :0.0 \
-    #    -pix_fmt yuv420p -vcodec libx264 \
-    #    -acodec libmp3lame -f alsa \
-    #    -preset ultrafast -b:v 1024k -b:a 128k \
-    #    -f flv "rtmp://live.justin.tv/app/live_20008920_0X0yebSelZagw2xxuIwSUnIsWi3CXX"
-    ##ffmpeg \
-    ##    -f alsa \
-    ##    -ac $FFX_DUAL \
-    ##    -i pulse \
-    ##    -f x11grab \
-    ##    -r $FFX_FPS \
-    ##    -s $FFX_RES \
-    ##    -i :0.0 \
-    ##    -pix_fmt yuv420p \
-    ##    -acodec $FFX_AUDIO \
-    ##    -vcodec $FFX_VIDEO \
-    ##    -preset $FFX_PRESET \
-    ##    -crf $FFX_CRF \
-    ##    -ar 44100 \
-    ##    -threads $FFX_THREADS \
-    ##    -f flv "rtmp://live.justin.tv/app/live_20008920_0X0yebSelZagw2xxuIwSUnIsWi3CXX"
-
-    #ffmpeg \
-    #-f x11grab -s 1920x1080 -r 30 -i :0.0 \
-    #-vb 128k -pix_fmt yuv420p -vcodec libx264 \
-    #-f alsa -acodec libmp3lame \
-    #-preset ultrafast -b:v 1024k -b:a 128k \
-    #-f flv "rtmp://live.justin.tv/app/live_20008920_0X0yebSelZagw2xxuIwSUnIsWi3CXX"
-
-    #acodec libmp3lame -ar 44100 -threads 6 -qscale 3 -b 712000 -bufsize 512k \
+        -f alsa \
+        -i pulse \
+        -f x11grab \
+        -s 1920x1080 \
+        -r 30 \
+        -i :0.0 \
+        -c:v libx264 \
+        -preset fast \
+        -pix_fmt yuv420p \
+        -s 1920x1080 \
+        -c:a libmp3lame \
+        -ar 44100 \
+        -threads 0 \
+        -b:v 3072k \
+        -b:a 128k \
+        -af aresample=async=24000:first_pts=0 \
+        -bufsize 1024k \
+        -f flv \
+        "rtmp://live.justin.tv/app/$STREAM_KEY"
 }
-
- streaming() {
-     INRES="1920x1080" # input resolution
-     OUTRES="1920x1080" # output resolution
-     FPS="15" # target FPS
-     GOP="30" # i-frame interval, should be double of FPS, 
-     GOPMIN="30" # min i-frame interval, should be equal to fps, 
-     THREADS="0" # max 6
-     CBR="2500k" # constant bitrate (should be between 1000k - 3000k)
-     QUALITY="ultrafast"  # one of the many FFMPEG preset
-     AUDIO_RATE="44100"
-     STREAM_KEY="$1" # use the terminal command Streaming streamkeyhere to stream your video to twitch or justin
-     SERVER="live-fra" # twitch server in frankfurt, see http://bashtech.net/twitch/ingest.php for list
-     
-     ffmpeg -use_wallclock_as_timestamps 1 -f x11grab -s "$INRES" -r "$FPS" -i :0.0 -f alsa -i pulse -f flv -ac 2 -ar $AUDIO_RATE \
-       -vcodec libx264 -g $GOP -keyint_min $GOPMIN -b $CBR -minrate $CBR -maxrate $CBR -pix_fmt yuv420p\
-       -s $OUTRES -preset $QUALITY -tune film -acodec libmp3lame -b:a 128k -threads $THREADS -strict normal \
-       -bufsize $CBR "rtmp://$SERVER.twitch.tv/app/live_20008920_0X0yebSelZagw2xxuIwSUnIsWi3CXX"
- }
-
 
 case $1 in
     "twitch")
-        record_fullscreen
-        ;;
-
-    "disk")
-
-        ;;
-
-    *)
-        streaming
-        exit 1
+        stream_twitch
         ;;
 esac
