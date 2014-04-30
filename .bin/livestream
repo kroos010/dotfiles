@@ -31,7 +31,8 @@ stream_twitch()
         -af aresample=async=24000:first_pts=0 \
         -bufsize 1024k \
         -f flv \
-        "rtmp://live.justin.tv/app/$STREAM_KEY"
+        "rtmp://live-ams.twitch.tv/app/$STREAM_KEY"
+
 }
 
 case $1 in

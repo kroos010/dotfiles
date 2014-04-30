@@ -41,6 +41,11 @@ panel_render_music()
 	echo $(ncmpcpp --now-playing '%t - %a')
 }
 
+panel_render_twitch()
+{
+	echo $(curl -s http://localhost/twitch.php)
+}
+
 panel_process()
 {
 	echo $1
