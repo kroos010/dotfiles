@@ -21,6 +21,7 @@ xsetroot -cursor_name left_ptr &
 ## Eyecandy
 feh --bg-scale $WALLPAPER &
 compton --config $HOME/.config/compton/compton.conf --vsync opengl &
+bspwm_panel &
 
 ## Start the daemons
 udiskie &
