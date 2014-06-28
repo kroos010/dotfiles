@@ -1,0 +1,12 @@
+#! /bin/sh
+
+case $1 in
+    "vbox")
+        sudo modprobe -a vboxdrv vboxnetadp vboxnetflt
+        ;;
+
+    *)
+        echo "Unknown application..."
+        exit 1
+        ;;
+esac

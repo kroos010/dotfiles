@@ -1,0 +1,33 @@
+#!/bin/bash
+
+volume_increase()
+{
+    # G930 Headset
+    ponymix -d "G930" increase 2
+}
+
+volume_decrease()
+{
+    # G930 Headset
+    ponymix -d "G930" decrease 2
+}
+
+volume_mute()
+{
+    # G930 Headset
+    ponymix -d "G930" toggle
+}
+
+case $1 in
+    "up") 
+        volume_increase
+        ;;
+
+    "down")
+        volume_decrease
+        ;;
+
+    "mute")
+        volume_mute
+        ;;
+esac

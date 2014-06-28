@@ -1,0 +1,79 @@
+!-- Xft
+Xft.dpi:                96
+Xft.antialias:          true
+Xft.rgba:               rgb
+Xft.hinting:            true
+Xft.autohint:           false
+Xft.hintstyle:          hintslight
+Xft.lcdfilter:          lcddefault
+
+!--- URxvt
+URxvt.scrollBar:        false
+URxvt.saveLines:        1000
+
+!URxvt.cursorUnderline: false
+
+!URxvt.letterSpace:      -1
+
+URxvt.depth:            32
+URxvt.foreground:       #FFFFFF
+URxvt.background:       [85]#000000
+URxvt.cursorColor:      #00FF00
+URxvt*cursorBlink:      true
+
+!URxvt*font:            -*-lemon-*-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*boldFont:        -*-lemon-*-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*italicFont:      -*-lemon-*-*-*-*-*-*-*-*-*-*-*-*
+!URxvt*bolditalicFont:  -*-lemon-*-*-*-*-*-*-*-*-*-*-*-*
+
+!--- Colors
+*background: #252525
+*foreground: #c3c2c5
+ 
+! black
+*color0: #4E4E4E
+ 
+! bright_black
+*color8: #7D7D7D
+ 
+! red
+*color1: #ff4070
+ 
+! bright_red
+*color9: #ff6699
+ 
+! green
+*color2: #d5f85f
+ 
+! bright_green
+*color10: #99ff66
+ 
+! yellow
+*color3: #ffa466
+ 
+! bright_yellow
+*color11: #faff66
+ 
+! blue
+*color4: #00A1E4
+ 
+! bright_blue
+*color12: #00B4FF
+ 
+! magenta
+*color5: #7d66ff
+ 
+! bright_magenta
+*color13: #a982ff
+ 
+! cyan
+*color6: #00CCFF
+ 
+! bright_cyan
+*color14: #26DED2
+ 
+! white
+*color7: #D6D6D6
+ 
+! bright_white
+*color15: #F0F0F0
