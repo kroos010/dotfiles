@@ -1,6 +1,14 @@
 #! /bin/sh
 
-bspc monitor -d 0001 0010 0011
+i=1
+for monitor in $(bspc query -M); do
+bspc monitor $monitor \
+        -n "$i" \
+        -d $i/{a,b,c}
+    let i++
+done
+NMON=$i
+unset i
 
 bspc config border_width                2
 bspc config window_gap                  12
