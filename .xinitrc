@@ -1,3 +1,10 @@
+#!/bin/sh
+
+## Adding fonts to the path
+xset +fp /usr/share/fonts/local
+xset +fp /usr/share/fonts/misc
+xset +fp $HOME/.fonts
+xset fp rehash
 
 ## X Settings
 xrdb -merge $HOME/.Xresources
