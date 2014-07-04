@@ -22,6 +22,12 @@ XF86AudioLowerVolume
 XF86AudioMute
     ponycontrol mute
 
+########
+# Misc #
+########
+Print
+    scrot -q 75 '/home/kevin/Pictures/Screenshots/%s.png'
+
 #################
 # bspwm hotkeys #
 #################
