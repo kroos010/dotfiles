@@ -9,7 +9,7 @@ savefiles()
         "$DIR_DOTFILES".bin/
 
     ## $HOME/.bin/panel
-    rsync -R --progress --human-readable --update --checksum \
+    rsync -r --progress --human-readable --update --checksum \
         $HOME/.bin/panel/* \
         "$DIR_DOTFILES".bin/panel/
 

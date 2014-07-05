@@ -1,0 +1,49 @@
+#! /bin/sh
+
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_HEIGHT=16
+PANEL_FONT_FAMILY='-lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1'
+PANEL_FONT_SIZE=6
+PANEL_COLOR_BACKGROUND='#222222'
+PANEL_COLOR_FOREGROUND='#EFEFEF'
+
+if [ $(pgrep -cx panel) -gt 1 ]; then
+    printf "%s\n" "The panel is already running." >&2
+    exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc config top_padding $PANEL_HEIGHT
+
+
+## FIFO INPUTS
+bspc control --subscribe > "$PANEL_FIFO" &
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+
+while true ; do
+    printf "D%s\n" "$(date +'%d-%m-%y %H:%M:%S')" > "$PANEL_FIFO"
+
+    sleep 0.7s;
+done &
+
+cat "$PANEL_FIFO" \
+| \
+`pwd`/panel_dzen2 \
+    -f "$PANEL_FONT_FAMILY" \
+    -s "$PANEL_FONT_SIZE" \
+| \
+dzen2 \
+    -e \
+    -dock \
+    -h $PANEL_HEIGHT \
+    -ta l \
+    -title-name panel \
+    -fn "${PANEL_FONT_FAMILY}:pixelsize=${PANEL_FONT_SIZE}" \
+    -bg "$PANEL_COLOR_BACKGROUND" \
+    -fg "$PANEL_COLOR_FOREGROUND" &
+
+wait
