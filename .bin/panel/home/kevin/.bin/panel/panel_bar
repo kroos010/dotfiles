@@ -1,0 +1,84 @@
+#! /bin/sh
+
+OFFSET=' '
+
+while read -r line; do
+
+    case $line in
+        C*) ## Clock and date
+            timedate=${line#?}
+            ;;
+
+        W*) ## BSPWM intenral state
+            wminfo=("" "" "")
+            currentMonitor=0
+            bspwmMessage=${line#?}
+
+            IFS=':'
+            set -- ${line#?}
+            while [ $# -gt 0 ]; do
+                item=$1
+                name=${item#?}
+                case $item in
+                    [Mm]*) ## Current focused monitor
+                        currentMonitor="$name"
+                        ;;
+                    O*) ## Focused occupied desktop
+                        wminfo[currentMonitor]="${wminfo[$currentMonitor]}%{+u} ${name} %{-u}"
+                        ;;
+                    F*) ## Focused free desktop
+                        wminfo[currentMonitor]="${wminfo[$currentMonitor]}%{+u} ${name} %{-u}"
+                        ;;
+                    U*) ## Focused urgent desktop
+                        wminfo[currentMonitor]="${wminfo[$currentMonitor]}%{+u} ${name} %{-u}"
+                        ;;
+                    o*) ## Occupied resktop
+                        wminfo[currentMonitor]="${wminfo[$currentMonitor]} ${name} "
+                        ;;
+                    f*) ## Free desktop
+                        wminfo[currentMonitor]="${wminfo[$currentMonitor]} ${name} "
+                        ;;
+                    u*) ## Urgent desktop
+                        wminfo[currentMonitor]="${wminfo[$currentMonitor]} ${name} "
+                        ;;
+                esac
+                shift
+            done
+            ;;
+
+
+    esac
+
+
+###########################
+# Output to the bar panel #
+###########################
+
+## Screen 1
+printf "%s" "%{S0}%{l}${OFFSET}\
+${wminfo[0]}"
+
+printf "%s" "%{S0}%{r}\
+Screen 1 right\
+${OFFSET}"
+
+## Screen 2
+printf "%s" "%{S1}%{l}${OFFSET}\
+${wminfo[1]}"
+
+printf "%s" "%{S1}%{r}\
+ $timedate\
+${OFFSET}"
+
+## Screen 3
+printf "%s" "%{S2}%{l}${OFFSET}\
+${wminfo[2]}"
+
+printf "%s" "%{S2}%{r}\
+Screen 3 right\
+${OFFSET}"
+
+## Send enter
+printf "\n"
+
+done

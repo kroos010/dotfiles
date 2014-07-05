@@ -1,0 +1,42 @@
+#! /bin/sh
+
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_HEIGHT=16
+PANEL_FOREGROUND='#FFEEEEEE'
+PANEL_BACKGROUND='#BB000000'
+#PANEL_FONT='*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*,-lucy-tewi-medium-r-normal--11-90-75-75-p-58-iso10646-1'
+#PANEL_FONT='*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*,-benis-lemon-medium-r-normal--10-110-75-75-m-50-iso8859-1'
+PANEL_FONT='*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*,-benis-lemon-abunai-abunai-medium-r-normal--10-110-75-75-m-50-iso10646-1'
+
+if [ $(pgrep -cx panel) -gt 1 ]; then
+    printf "%s\n" "The panel is already running." >&2
+    exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc config top_padding $PANEL_HEIGHT
+
+bspc control --subscribe > "$PANEL_FIFO" &
+
+
+while true; do
+    printf "%s%s\n" "C" "$(date +'%d-%m-%y %H:%M:%S')" > "$PANEL_FIFO"
+    sleep 0.7s;
+done &
+
+cat "$PANEL_FIFO" | \
+`pwd`/panel_bar | \
+bar \
+    -g x$PANEL_HEIGHT \
+    -F "$PANEL_FOREGROUND" \
+    -B "$PANEL_BACKGROUND" \
+    -f "$PANEL_FONT" | \
+while read line; do
+    `pwd`/panel_execute $line
+done &
+
+wait
