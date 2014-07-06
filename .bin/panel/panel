@@ -29,7 +29,7 @@ while true; do
 done &
 
 cat "$PANEL_FIFO" | \
-`pwd`/panel_bar | \
+$HOME/.bin/panel/panel_bar | \
 bar \
     -g x$PANEL_HEIGHT \
     -F "$PANEL_FOREGROUND" \
