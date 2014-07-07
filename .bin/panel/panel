@@ -24,8 +24,14 @@ bspc control --subscribe > "$PANEL_FIFO" &
 
 
 while true; do
-    printf "%s%s\n" "C" "$(date +'%d-%m-%y %H:%M:%S')" > "$PANEL_FIFO"
+    printf "%s%s\n" "DAT" "$(date +'%d-%m-%y %H:%M:%S')" > "$PANEL_FIFO"
+    printf "%s%s\n" "MUS" "$(ncmpcpp --now-playing '%t - %a')" > "$PANEL_FIFO"
     sleep 0.7s;
+done &
+
+while true; do
+    printf "%s%s\n" "VOL" "$(ponycontrol volume)" > "$PANEL_FIFO"
+    sleep 0.1s;
 done &
 
 cat "$PANEL_FIFO" | \

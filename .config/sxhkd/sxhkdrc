@@ -1,14 +1,17 @@
 #######################
 # Application Hotkeys #
 #######################
-super + return
+super + Return
     urxvt
 
 super + d
-    dmenu_run
-
-super + space
-    urxvt
+    dmenu_run  \
+        -b \
+        -fn 'Open Sans' \
+        -nb '#000000' \
+        -nf '#FFFFFF' \
+        -sb '#0587A0' \
+        -sf '#FFFFFF'
 
 #################
 # Media Hotkeys #
@@ -25,8 +28,11 @@ XF86AudioMute
 ########
 # Misc #
 ########
-Print
+super
     scrot -q 75 '/home/kevin/Pictures/Screenshots/%s.png'
+
+super + Print
+    sleep 0.2; scrot -s -q 75 '/home/kevin/Pictures/Screenshots/%s.png'
 
 #################
 # bspwm hotkeys #

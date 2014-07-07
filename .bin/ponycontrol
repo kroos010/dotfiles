@@ -18,6 +18,12 @@ volume_mute()
     ponymix -d "G930" toggle
 }
 
+volume_get()
+{
+    # G930 Headset
+    ponymix -d "G930" get-volume
+}
+
 case $1 in
     "up") 
         volume_increase
@@ -29,5 +35,9 @@ case $1 in
 
     "mute")
         volume_mute
+        ;;
+
+    "volume")
+        volume_get
         ;;
 esac
