@@ -22,6 +22,15 @@ bspc config top_padding $PANEL_HEIGHT
 
 bspc control --subscribe > "$PANEL_FIFO" &
 
+while true; do
+    printf "%s%s%s%s\n" "DSK" "SSD: $(df -h | grep 'sdb2' | awk '{ print $4 }'), " \
+                              "HDD: $(df -h | grep 'sdc2' | awk '{ print $4 }'), " \
+                              "HDD: $(df -h | grep 'sdc3' | awk '{ print $4 }')" > "$PANEL_FIFO"
+
+    printf "%s%s\n" "MAI" "mail: 0, zdev: 2" > "$PANEL_FIFO"
+
+    sleep 30s;
+done &
 
 while true; do
     printf "%s%s\n" "DAT" "$(date +'%d-%m-%y %H:%M:%S')" > "$PANEL_FIFO"

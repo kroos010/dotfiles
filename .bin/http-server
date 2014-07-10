@@ -1,0 +1,6 @@
+$HOME/.bin/app/http-server/node_modules/http-server/bin/http-server \
+	-p 8080 \
+	-a 0.0.0.0 \
+	-d true \
+	-i true \
+	-c-1

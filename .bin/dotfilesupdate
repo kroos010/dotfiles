@@ -65,14 +65,14 @@ gitpush()
     CURDIR=$(pwd)
     cd $DIR_DOTFILES
     git add .
-    $(git commit -m $1)
+    git commit -m $1
     git push
     cd $CURDIR
 }
 
 case $1 in
     "push")
-        gitpush $2
+        gitpush "$2"
         ;;
     
     "pull")

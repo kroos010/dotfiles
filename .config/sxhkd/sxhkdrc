@@ -32,7 +32,7 @@ super
     scrot -q 75 '/home/kevin/Pictures/Screenshots/%s.png'
 
 super + Print
-    sleep 0.2; scrot -s -q 75 '/home/kevin/Pictures/Screenshots/%s.png'
+    sleep 0.1; scrot -s -q 75 '/home/kevin/Pictures/Screenshots/%s.png'
 
 #################
 # bspwm hotkeys #

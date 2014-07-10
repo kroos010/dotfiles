@@ -34,8 +34,16 @@ while read -r line; do
             fi
             ;;
 
+        MAI*) ## Unread inboxes
+            mail=" ${line#???}   "
+            ;;
+
         VOL*) ## Volume
             volume=" $(panel_progress ${line#???} FF777777 FFFFFFFF)%{F#FFFFFFFF}   "
+            ;;
+
+        DSK*) ## Freediskspace
+            freediskspace=" ${line#???}   "
             ;;
 
         W*) ## BSPWM intenral state
@@ -97,6 +105,8 @@ ${wminfo[1]}"
 
 printf "%s" "%{S1}%{r}\
 $music\
+$freediskspace\
+$mail\
 $volume\
 $timedate\
 ${OFFSET}"
