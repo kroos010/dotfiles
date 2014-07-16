@@ -2,26 +2,34 @@
 
 volume_increase()
 {
-    # G930 Headset
-    ponymix -d "G930" increase 2
+    if [ ponymix list | grep "G930" ]; then
+        # G930 Headset
+        ponymix -d "G930" increase 2
+    fi
 }
 
 volume_decrease()
 {
-    # G930 Headset
-    ponymix -d "G930" decrease 2
+    if [ ponymix list | grep "G930" ]; then
+        # G930 Headset
+        ponymix -d "G930" decrease 2
+    fi
 }
 
 volume_mute()
 {
-    # G930 Headset
-    ponymix -d "G930" toggle
+    if [ ponymix list | grep "G930" ]; then
+        # G930 Headset
+        ponymix -d "G930" toggle
+    fi
 }
 
 volume_get()
 {
-    # G930 Headset
-    ponymix -d "G930" get-volume
+    if [ ponymix list | grep "G930" ]; then
+        # G930 Headset
+        ponymix -d "G930" get-volume
+    fi
 }
 
 case $1 in
