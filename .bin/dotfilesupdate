@@ -37,7 +37,7 @@ restorefiles()
         $HOME/
 
     ## Configuration files in the .config folder
-    rsync --progress --human-readable --update --checksum \
+    rsync -r --progress --human-readable --update --checksum \
         "$DIR_DOTFILES".config/{bspwm,sxhkd,wallpaper.jpg,gtk-3.0} \
         $HOME/.config/
 
