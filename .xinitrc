@@ -13,6 +13,7 @@ xsetroot -cursor_name left_ptr &
 
 ## Start Daemons
 pulseaudio --start &
+udiskie &
 
 ## Eyecandy
 feh --bg-scale $HOME/.config/wallpaper.jpg &
