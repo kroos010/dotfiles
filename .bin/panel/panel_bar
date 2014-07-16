@@ -17,6 +17,8 @@ panel_progress()
     esac
 }
 
+MONITOR_COUNT=$(bspc query -M | wc -l)
+
 OFFSET=' '
 
 while read -r line; do
@@ -91,6 +93,7 @@ while read -r line; do
 # Output to the bar panel #
 ###########################
 
+if [ "${MONITOR_COUNT}" == "3" ]; then
 ## Screen 1
 printf "%s" "%{S0}%{l}${OFFSET}\
 ${wminfo[0]}"
@@ -118,6 +121,24 @@ ${wminfo[2]}"
 printf "%s" "%{S2}%{r}\
 Screen 3 right\
 ${OFFSET}"
+fi
+
+
+if [ "${MONITOR_COUNT}" == "1" ]; then
+
+## Screen 1
+printf "%s" "%{S0}%{l}${OFFSET}\
+${wminfo[1]}"
+
+printf "%s" "%{S0}%{r}\
+$music\
+$freediskspace\
+$mail\
+$volume\
+$timedate\
+${OFFSET}"
+
+fi
 
 ## Send enter
 printf "\n"
