@@ -26,7 +26,7 @@ savefiles()
     ## All fonts
     rsync -r --progress --human-readable --update --checksum \
         $HOME/.fonts/ \
-        "$DIR_DOTFILES".config/
+        "$DIR_DOTFILES".fonts/
 }
 
 restorefiles()
