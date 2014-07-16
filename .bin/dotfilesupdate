@@ -27,7 +27,7 @@ savefiles()
 restorefiles()
 {
     ## $HOME/.bin/* (Exclude folders)
-    rsync --progress --human-readable --update --checksum \
+    rsync -r --progress --human-readable --update --checksum \
         "$DIR_DOTFILES".bin/* \
         $HOME/.bin/
 
