@@ -22,6 +22,11 @@ savefiles()
     rsync -r --progress --human-readable --update --checksum \
         $HOME/.config/{bspwm,sxhkd,wallpaper.jpg,gtk-3.0} \
         "$DIR_DOTFILES".config/
+
+    ## All fonts
+    rsync -r --progress --human-readable --update --checksum \
+        $HOME/.fonts/ \
+        "$DIR_DOTFILES".config/
 }
 
 restorefiles()
@@ -40,6 +45,11 @@ restorefiles()
     rsync -r --progress --human-readable --update --checksum \
         "$DIR_DOTFILES".config/{bspwm,sxhkd,wallpaper.jpg,gtk-3.0} \
         $HOME/.config/
+
+    ## All fonts
+    rsync -r --progress --human-readable --update --checksum \
+        "$DIR_DOTFILES".fonts/ \
+        $HOME/.fonts/
 
 }
 
