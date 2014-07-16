@@ -131,9 +131,6 @@ printf "%s" "%{S0}%{l}${OFFSET}\
 ${wminfo[1]}"
 
 printf "%s" "%{S0}%{r}\
-$music\
-$freediskspace\
-$mail\
 $volume\
 $timedate\
 ${OFFSET}"
