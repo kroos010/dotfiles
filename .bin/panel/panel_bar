@@ -48,6 +48,19 @@ while read -r line; do
             freediskspace=" ${line#???}   "
             ;;
 
+        BAT*) ## Battery info using acpi --battery
+            battery_info="${line#???}"
+            battery_mode=$(echo $battery_info | cut -d ' ' -f3 | sed 's/,//')
+            if [ "${battery_mode}" == "Charging" ] ; then
+                battery_mode="C"
+            else
+                battery_mode="D"
+            fi
+            battery_time="$(echo $battery_info | cut -d ' ' -f5)"
+            battery_perc="$(echo $battery_info | cut -d ' ' -f4 | sed 's/%,//')"
+            battery="$(panel_progress ${battery_perc} FF777777 FFFFFFFF)%{F#FFFFFFFF} ${battery_mode} ${battery_time}   "
+            ;;
+
         W*) ## BSPWM intenral state
             wminfo=("" "" "")
             currentMonitor=0
@@ -83,6 +96,7 @@ while read -r line; do
                 esac
                 shift
             done
+            IFS=''
             ;;
 
 
@@ -128,9 +142,10 @@ if [ "${MONITOR_COUNT}" == "1" ]; then
 
 ## Screen 1
 printf "%s" "%{S0}%{l}${OFFSET}\
-${wminfo[1]}"
+${wminfo[0]}"
 
 printf "%s" "%{S0}%{r}\
+$battery\
 $volume\
 $timedate\
 ${OFFSET}"

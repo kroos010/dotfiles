@@ -35,6 +35,7 @@ done &
 while true; do
     printf "%s%s\n" "DAT" "$(date +'%d-%m-%y %H:%M:%S')" > "$PANEL_FIFO"
     printf "%s%s\n" "MUS" "$(ncmpcpp --now-playing '%t - %a')" > "$PANEL_FIFO"
+    printf "%s%s\n" "BAT" "$(acpi --battery)" > "$PANEL_FIFO"
     sleep 0.7s;
 done &
 
